@@ -1,0 +1,37 @@
+module top (
+    input a, b, c, d,
+    output f1, f2, f3
+);
+
+    // Implementação de f1 como Soma de Produtos (SOP)
+    assign f1 = (~a & ~b & ~c & ~d) |  // m0
+                (~a & ~b & c & d)   |  // m3
+                (~a & b & ~c & ~d)  |  // m4
+                (a & ~b & ~c & ~d)  |  // m8
+                (a & b & ~c & ~d)   |  // m12
+                (a & b & ~c & d)    |  // m13
+                (a & b & c & d);       // m15
+
+    // Implementação de f2 como Produto de Somas (POS)
+    assign f2 = (a | b | c | d)    &  // M0
+                (a | ~b | c | d)   &  // M2
+                (a | ~b | c | ~d)  &  // M3
+                (~a | b | c | d)    &  // M5
+                (~a | b | c | ~d)  &  // M6
+                (~a | b | ~c | d)   &  // M7
+                (~a | ~b | ~c | ~d) &  // M8
+                (~a | ~b | c | ~d)  &  // M13
+                (~a | ~b | ~c | ~d);   // M15
+
+    // Implementação de f3 como Soma de Produtos (SOP)
+    assign f3 = (~a & ~b & ~c & ~d) |  // m0
+                (~a & ~b & c & ~d)  |  // m2
+                (~a & ~b & c & d)   |  // m3
+                (~a & b & c & d)    |  // m7
+                (a & ~b & ~c & ~d)  |  // m8
+                (a & ~b & ~c & d)   |  // m9
+                (a & b & ~c & ~d)   |  // m12
+                (a & b & ~c & d)    |  // m13
+                (a & b & c & d);       // m15
+
+endmodule
